@@ -1,16 +1,18 @@
 package com.example.jackson.cd125_final;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
+import android.util.Log;
+import android.view.View;
 
 public class IncomeActivity extends AppCompatActivity{
-    public char incomeInt;
+    IncomeActivity () {
 
-    public static void main(String[] unused) {
-        onOpenIncome();
     }
 
-    public void onOpenIncome() {
+    public void main(String[] args) {
         setContentView(R.layout.activity_income);
-        //EditText incomeInput = new EditText(findViewById(R.id("input_income")));
+        Log.i("tag", "setting screen");
     }
+
+
 }
