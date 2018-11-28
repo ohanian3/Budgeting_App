@@ -6,7 +6,12 @@ import android.view.View;
 import android.util.Log;
 import android.content.Intent;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
+
+    private static Intent openIncome;
+    private static Intent openEdit;
+    private static Intent openHome;
+
     MainActivity() {
         }
 
@@ -17,12 +22,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void launchIncomeActivity(View view) {
-        Intent openIncome = new Intent(getApplicationContext(), IncomeActivity.class);
+        openIncome = new Intent(getApplicationContext(), IncomeActivity.class);
         startActivity(openIncome);
-        setContentView(R.layout.activity_income);
-
     }
 
+    public void launchEditActivity(View view) {
+        openEdit = new Intent(getApplicationContext(), EditActivity.class);
+        startActivity(openEdit);
+    }
 
+    public void launchHome() {
+        openHome = new Intent(getApplicationContext(), EditActivity.class);
+        startActivity(openHome);
+    }
 
 }
