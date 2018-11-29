@@ -2,6 +2,9 @@ package com.example.jackson.cd125_final;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+/**
+ * All this is for is displaying activity_add_budgets.xml at appropriate times, and closing it.
+ */
 
 public class EditActivity extends AppCompatActivity{
     EditActivity () {
@@ -15,7 +18,12 @@ public class EditActivity extends AppCompatActivity{
     }
 
     public void main(String[] args) {
-        setContentView(R.layout.activity_income);
     }
 
+    /**
+     * Closes activity_add_budgets.xml
+     */
+    public void closeActivity() {
+        finish();
+    }
 }
