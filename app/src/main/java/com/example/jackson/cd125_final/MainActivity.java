@@ -6,9 +6,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.content.Intent;
 import java.util.ArrayList;
+import android.widget.TextView;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity{
 
+    /**
+     * Display string for all budgets
+     */
+    private String budgetList = "";
     /**
      * List of all budgets.
      */
@@ -42,6 +48,12 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TextView budgetText = findViewById(R.id.budgets);
+
+        budgetText.setText(budgetList);
+
+
     }
 
     /**
@@ -75,8 +87,17 @@ public class MainActivity extends AppCompatActivity{
      */
     public void addNewBudget() {
         EditText inputBudget =  findViewById(R.id.inputBudgetField);
-        allBudgets.add(new Budgets(inputBudget.getText().toString()));
+        allBudgets.add(new Budgets(inputBudget.getText().toString(), 0));
+        budgetList = getBudgetDisplay();
 
+    }
+
+    private String getBudgetDisplay() {
+        String returnBudgets = "";
+        for (int i = 0; i < allBudgets.size(); i++) {
+            returnBudgets = returnBudgets + allBudgets.get(i).getBudgetName() + "\n";
+        }
+        return returnBudgets;
     }
 
 }

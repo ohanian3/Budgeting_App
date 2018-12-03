@@ -6,7 +6,7 @@ import android.util.Log;
 /**
  * All this is for is displaying activity_income.xml at appropriate times, and closing it.
  */
-public class IncomeActivity extends AppCompatActivity{
+public class IncomeActivity extends MainActivity{
     IncomeActivity () {
 
     }
