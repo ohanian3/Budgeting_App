@@ -1,24 +1,32 @@
 package com.example.jackson.cd125_final;
 
+
+
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.content.Intent;
 import java.util.ArrayList;
 import android.widget.TextView;
 import android.util.Log;
+import android.graphics.Color;
+
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 public class MainActivity extends AppCompatActivity{
 
-    /**
-     * Display string for all budgets
-     */
-    private String budgetList = "";
+    public static PieChart pieChart;
+
     /**
      * List of all budgets.
      */
-    public ArrayList<Budgets> allBudgets = new ArrayList<>();
+    public static ArrayList<Budgets> allBudgets = new ArrayList<>();
     /**
      * Intent object for opening Income.
      */
@@ -30,11 +38,11 @@ public class MainActivity extends AppCompatActivity{
     /**
      * Creates an instance of IncomeActivity so that it can be closed from non-static context.
      */
-    public IncomeActivity callIncome = new IncomeActivity();
+   // public IncomeActivity callIncome = new IncomeActivity();
     /**
      * Creates an instance of EditActivity so that it can be closed from non-static context.
      */
-    public EditActivity callEdit = new EditActivity();
+   // public EditActivity callEdit = new EditActivity();
 
 
     MainActivity() {
@@ -49,9 +57,11 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView budgetText = findViewById(R.id.budgets);
 
-        budgetText.setText(budgetList);
+        TextView addBudgetView = findViewById(R.id.budgetsMain);
+        addBudgetView.setText(EditActivity.budgetList);
+
+        setPieChart();
 
 
     }
@@ -72,32 +82,61 @@ public class MainActivity extends AppCompatActivity{
     public void launchEditActivity(View view) {
         openEdit = new Intent(getApplicationContext(), EditActivity.class);
         startActivity(openEdit);
+        finish();
     }
 
     /**
      * Closes IncomeActivity or EditActivity when called. Called by the button in both as of rn.
      */
     public void launchHome() {
-        callIncome.closeActivity();
-        callEdit.closeActivity();
+        TextView addBudgetView = findViewById(R.id.budgetsMain);
+        addBudgetView.setText(EditActivity.budgetList);
+
+
+        //callIncome.closeActivity();
+        //callEdit.closeActivity();
     }
 
-    /**
-     * Add a new budget, creates a Budget item and places it in the allBudgets ArrayList.
-     */
-    public void addNewBudget() {
-        EditText inputBudget =  findViewById(R.id.inputBudgetField);
-        allBudgets.add(new Budgets(inputBudget.getText().toString(), 0));
-        budgetList = getBudgetDisplay();
 
+
+
+
+    public static String getBudgetDisplay() {
+        return allBudgets.get(0).getBudgetName();
     }
 
-    private String getBudgetDisplay() {
-        String returnBudgets = "";
-        for (int i = 0; i < allBudgets.size(); i++) {
-            returnBudgets = returnBudgets + allBudgets.get(i).getBudgetName() + "\n";
+    public void setPieChart() {
+        pieChart = (PieChart) findViewById(R.id.piechart_1);
+
+        pieChart.setUsePercentValues(true);
+        pieChart.getDescription().setEnabled(true);
+        pieChart.setExtraOffsets(5,10,5,5);
+        pieChart.setDragDecelerationFrictionCoef(0.9f);
+        pieChart.setTransparentCircleRadius(61f);
+        pieChart.setHoleColor(Color.WHITE);
+        pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
+        ArrayList<PieEntry> yValues = new ArrayList<>();
+        int j = 0;
+        ArrayList<Budgets> chartValues = Budgets.getAllBudgets();
+        for (Budgets i : chartValues) {
+            yValues.add(new PieEntry(4f, i.getBudgetName()));
+            j += 20;
         }
-        return returnBudgets;
-    }
+        /*
+        yValues.add(new PieEntry(34f,""));
+        yValues.add(new PieEntry(56f,""));
+        yValues.add(new PieEntry(66f,""));
+        yValues.add(new PieEntry(45f,""));
+        */
 
+        PieDataSet dataSet = new PieDataSet(yValues, "Budget Overview");
+                dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
+        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        PieData pieData = new PieData((dataSet));
+        pieData.setValueTextSize(10f);
+        pieData.setValueTextColor(Color.YELLOW);
+        pieChart.setData(pieData);
+        //PieChart Ends Here
+    }
 }

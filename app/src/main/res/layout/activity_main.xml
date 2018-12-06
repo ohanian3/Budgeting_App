@@ -18,10 +18,9 @@
         android:layout_height="114dp"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginBottom="7dp"
         android:layout_weight="1"
         android:onClick="launchIncomeActivity"
-        android:text="Adjust Income"
+        android:text="New Transaction"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/open_edit" />
@@ -44,11 +43,26 @@
         app:layout_constraintTop_toTopOf="@+id/open_income" />
 
     <TextView
-        android:id="@+id/budgets"
+        android:id="@+id/budgetsMain"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="16dp"
         android:text="TextView"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="57dp" />
+        tools:layout_editor_absoluteY="16dp" />
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/piechart_1"
+            android:layout_width="match_parent"
+            android:layout_height="300sp"></com.github.mikephil.charting.charts.PieChart>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
