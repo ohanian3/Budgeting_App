@@ -28,52 +28,40 @@
         android:layout_alignParentTop="true"
         android:text="Add Transaction" />
 
-    <ScrollView
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="67dp">
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/piechart_income"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="0dp"></ScrollView>
+            android:layout_height="300sp"></com.github.mikephil.charting.charts.PieChart>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/rb"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_gravity="center_vertical"
             android:orientation="vertical">
-
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/piechart_income"
-                android:layout_width="match_parent"
-                android:layout_height="300sp"></com.github.mikephil.charting.charts.PieChart>
-
-            <android.support.v4.view.ViewPager
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
         </LinearLayout>
 
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/runRadios"
+        android:layout_width="123dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="261dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="runRadios"
+        android:text="Go" />
 </RelativeLayout>

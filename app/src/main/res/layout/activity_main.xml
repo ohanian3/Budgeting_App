@@ -10,6 +10,8 @@
     tools:context=".MainActivity"
     tools:layout_editor_absoluteY="81dp">
 
+r
+
 
     <Button
         android:id="@+id/open_income"
@@ -63,6 +65,8 @@
             android:id="@+id/piechart_1"
             android:layout_width="match_parent"
             android:layout_height="300sp"></com.github.mikephil.charting.charts.PieChart>
+
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
