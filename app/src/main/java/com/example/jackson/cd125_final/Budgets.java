@@ -22,6 +22,11 @@ public class Budgets extends AppCompatActivity{
     private int budgetAmount = 0;
 
     /**
+     * The amount used from this budget.
+     */
+    private int spent = 0;
+
+    /**
      * Map of all budgets sorted by name.
      */
     public static Map allBudgets = new HashMap<String, Budgets>();
@@ -89,6 +94,14 @@ public class Budgets extends AppCompatActivity{
             ret = ret + budgetArr.get(i).getBudgetAmount();
         }
         return ret;
+    }
+
+    public void addTrans(int amount) {
+        this.spent += amount;
+    }
+
+    public int getSpent() {
+        return this.spent;
     }
 
 }

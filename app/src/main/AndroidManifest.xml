@@ -21,6 +21,15 @@
             </intent-filter>
         </activity>
 
+        <activity   android:name="TransActivity"
+            android:label="Setting"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.TRANS" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity   android:name=".EditActivity"
             android:label="Edit Budget"
             >

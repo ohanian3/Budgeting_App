@@ -35,6 +35,12 @@ public class MainActivity extends AppCompatActivity{
      * Intent object for opening Edit.
      */
     private static Intent openEdit;
+
+    /**
+     * Intent object for opening Trans.
+     */
+    private static Intent openTrans;
+
     /**
      * Creates an instance of IncomeActivity so that it can be closed from non-static context.
      */
@@ -76,13 +82,21 @@ public class MainActivity extends AppCompatActivity{
     }
 
     /**
+     * This method is called when the button is pressed, creates an Intent and launches IncomeActivity.
+     * @param view is Null.
+     */
+    public void launchTransActivity(View view) {
+        openTrans = new Intent(getApplicationContext(), TransActivity.class);
+        startActivity(openTrans);
+    }
+
+    /**
      * This method is called when the button is pressed, creates an Intent and launches EditActivity.
      * @param view Is null.
      */
     public void launchEditActivity(View view) {
         openEdit = new Intent(getApplicationContext(), EditActivity.class);
         startActivity(openEdit);
-        finish();
     }
 
     /**
@@ -117,17 +131,19 @@ public class MainActivity extends AppCompatActivity{
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
         ArrayList<PieEntry> yValues = new ArrayList<>();
         int j = 0;
+        int totalSpent = 0;
         ArrayList<Budgets> chartValues = Budgets.getAllBudgets();
         for (Budgets i : chartValues) {
-            yValues.add(new PieEntry(4f, i.getBudgetName()));
-            j += 20;
+            totalSpent = totalSpent + i.getSpent();
         }
-        /*
-        yValues.add(new PieEntry(34f,""));
-        yValues.add(new PieEntry(56f,""));
-        yValues.add(new PieEntry(66f,""));
-        yValues.add(new PieEntry(45f,""));
-        */
+
+        if (totalSpent == 0) {
+            yValues.add(new PieEntry(4f, Budgets.getTotalBudget()));
+        } else {
+            yValues.add(new PieEntry((Budgets.getTotalBudget() - totalSpent), "Remaining"));
+            yValues.add(new PieEntry( totalSpent, "Spent"));
+        }
+
 
         PieDataSet dataSet = new PieDataSet(yValues, "Budget Overview");
                 dataSet.setSliceSpace(3f);
@@ -139,4 +155,5 @@ public class MainActivity extends AppCompatActivity{
         pieChart.setData(pieData);
         //PieChart Ends Here
     }
+
 }

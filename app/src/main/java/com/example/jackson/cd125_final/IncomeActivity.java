@@ -85,7 +85,7 @@ public class IncomeActivity extends MainActivity{
         pieChart.setExtraOffsets(5,10,5,5);
         pieChart.setDragDecelerationFrictionCoef(0.9f);
         pieChart.setTransparentCircleRadius(61f);
-        pieChart.setHoleColor(Color.WHITE);
+        pieChart.setHoleColor(Color.BLACK);
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
         ArrayList<PieEntry> yValues = new ArrayList<>();
 
@@ -158,6 +158,9 @@ public class IncomeActivity extends MainActivity{
                 selBudgets.add(Budgets.getAllBudgets().get(index));
 
             }
+        }
+        if (selected) {
+            makeSelectedPieChart(selBudgets);
         }
 
     }
