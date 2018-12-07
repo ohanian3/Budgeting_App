@@ -57,7 +57,7 @@ public class IncomeActivity extends MainActivity{
         }
 
 
-        // Decides which pe chart to draw TODO
+        // Decides which pe chart to draw
         if (!selected) {
             makePieChart();
         } else {

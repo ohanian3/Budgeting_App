@@ -49,6 +49,12 @@ public class Budgets extends AppCompatActivity{
         budgetName = type;
         budgetAmount = amount;
     }
+
+    Budgets (Budgets i) {
+        this.budgetName = i.getBudgetName();
+        this.spent = i.getSpent();
+        this.budgetAmount = i.getBudgetAmount();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
