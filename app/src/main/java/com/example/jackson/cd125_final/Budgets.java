@@ -86,6 +86,10 @@ public class Budgets extends AppCompatActivity{
         return budgetArr;
     }
 
+    /**
+     * Prints a list of all bdugets.
+     * @return A string formatted so that one budet is on each line.
+     */
     public static String printBudgets() {
         String ret = "Budgets - \n";
         for(int i = 0; i < budgetArr.size(); i++) {
@@ -102,12 +106,32 @@ public class Budgets extends AppCompatActivity{
         return ret;
     }
 
+    /**
+     * Adds a transaction for this budget.
+     * @param amount The amount of the budget.
+     */
     public void addTrans(int amount) {
         this.spent += amount;
     }
 
+    /**
+     * A getter for the amount spent off this budget.
+     * @return this.spent
+     */
     public int getSpent() {
         return this.spent;
+    }
+
+    public static void removeBudget(Budgets budget) {
+        budgetArr.remove(budget);
+    }
+
+    public static int getAllSpent() {
+        int allSpent = 0;
+        for (Budgets i : budgetArr) {
+            allSpent += i.getSpent();
+        }
+        return allSpent;
     }
 
 }

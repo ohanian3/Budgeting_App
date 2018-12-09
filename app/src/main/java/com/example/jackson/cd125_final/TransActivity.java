@@ -2,9 +2,11 @@ package com.example.jackson.cd125_final;
 
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -51,6 +53,10 @@ public class TransActivity extends MainActivity{
         finish();
     }
 
+    /**
+     * Adds a transaction to the relevant Budgets item.
+     * @param view This doesn't do anything.
+     */
     public void addTrans(View view) {
         TextInputEditText inputBudgetAmount =  (TextInputEditText) findViewById(R.id.inputTrans);
         int trans = Integer.parseInt(inputBudgetAmount.getText().toString());
@@ -66,9 +72,9 @@ public class TransActivity extends MainActivity{
 
             }
         }
-
-
-
+        //hides keyboard
+        InputMethodManager goAwayKeyboard = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        goAwayKeyboard.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
     }
 }

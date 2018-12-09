@@ -125,16 +125,20 @@ public class IncomeActivity extends MainActivity{
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
         ArrayList<PieEntry> yValues = new ArrayList<>();
 
-        double budgetTotal = (double) Budgets.getTotalBudget();
-        double percentOfBudget = 0.0;
+        int budgetTotal = 0;
+        int totalSpent = 0;
 
-
-        // Defualt shows all budgets and how much they compose of the total
         for (Budgets i : selectedBudgets) {
-            percentOfBudget = ((double) i.getBudgetAmount() / budgetTotal) * 100.0;
-            yValues.add(new PieEntry((int) percentOfBudget,i.getBudgetName()));
+            totalSpent = totalSpent + i.getSpent();
+            budgetTotal = budgetTotal + i.getBudgetAmount();
         }
 
+        if (totalSpent == 0) {
+            yValues.add(new PieEntry(4f, Budgets.getTotalBudget()));
+        } else {
+            yValues.add(new PieEntry((budgetTotal - totalSpent), "Remaining"));
+            yValues.add(new PieEntry( totalSpent, "Spent"));
+        }
 
 
         PieDataSet dataSet = new PieDataSet(yValues, "Your Budget");

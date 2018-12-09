@@ -50,13 +50,14 @@ public class MainActivity extends AppCompatActivity{
     private static Intent openTrans;
 
     /**
-     * Creates an instance of IncomeActivity so that it can be closed from non-static context.
+     * Remaining money across all budgets.
      */
-   // public IncomeActivity callIncome = new IncomeActivity();
+    private static int remaining;
+
     /**
-     * Creates an instance of EditActivity so that it can be closed from non-static context.
+     * Display on main page.
      */
-   // public EditActivity callEdit = new EditActivity();
+    private String budgetDisplay = "";
 
 
     MainActivity() {
@@ -72,17 +73,25 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //reads saved files TODO
         if (readSave("user data") != null) {
             for (Budgets i : readSave("user data")) {
                 Budgets j = new Budgets(i);
             }
         }
 
+        //Text display on main page
+        remaining = (Budgets.getTotalBudget() - Budgets.getAllSpent());
+        budgetDisplay = "\t $" + remaining + " remaining of $" + Budgets.getTotalBudget();
 
-        TextView addBudgetView = findViewById(R.id.budgetsMain);
-        addBudgetView.setText(EditActivity.budgetList);
+        TextView budgView = findViewById(R.id.mainBudgetDisplay);
+        budgView.setText(budgetDisplay);
 
+
+        //Make main page pie chart
         setPieChart();
+
+
 
     }
 
@@ -114,22 +123,6 @@ public class MainActivity extends AppCompatActivity{
         startActivity(openEdit);
        // writeSave("user data");
     }
-
-    /**
-     * Closes IncomeActivity or EditActivity when called. Called by the button in both as of rn.
-     */
-    public void launchHome() {
-        TextView addBudgetView = findViewById(R.id.budgetsMain);
-        addBudgetView.setText(EditActivity.budgetList);
-
-
-        //callIncome.closeActivity();
-        //callEdit.closeActivity();
-    }
-
-
-
-
 
     public static String getBudgetDisplay() {
         return allBudgets.get(0).getBudgetName();

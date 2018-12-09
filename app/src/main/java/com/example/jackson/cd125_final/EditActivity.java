@@ -1,10 +1,16 @@
 package com.example.jackson.cd125_final;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.util.Log;
+
+import java.util.ArrayList;
 
 
 /**
@@ -18,6 +24,11 @@ public class EditActivity extends MainActivity{
      */
     public static String budgetList = " ";
 
+    /**
+     * List of all radioButtons
+     */
+    ArrayList<RadioButton> radioBtnList = new ArrayList<>();
+
 
     EditActivity () {
 
@@ -30,9 +41,14 @@ public class EditActivity extends MainActivity{
         setContentView(R.layout.activity_add_budgets);
 
 
-        TextView addBudgetView = findViewById(R.id.budgetAddView);
 
-        addBudgetView.setText(Budgets.printBudgets());
+
+        for (int i = 0; i < Budgets.getAllBudgets().size(); i++) {
+            radioBtnList.add(new RadioButton(this));
+            LinearLayout layout = findViewById(R.id.selectBudget);
+            layout.addView(radioBtnList.get(i));
+            radioBtnList.get(i).setText(Budgets.getAllBudgets().get(i).getBudgetName());
+        }
 
 
 
@@ -49,10 +65,17 @@ public class EditActivity extends MainActivity{
             Budgets newBudget = new Budgets(inputBudget.getText().toString(), budgetAmt);
             Log.i("budget", newBudget.getBudgetName());
             Log.i("Budget", "Made new Budget");
+        InputMethodManager goAwayKeyboard = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        goAwayKeyboard.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+        for (int i = 0; i < Budgets.getAllBudgets().size(); i++) {
+            radioBtnList.add(new RadioButton(this));
+            LinearLayout layout = findViewById(R.id.selectBudget);
+            layout.addView(radioBtnList.get(i));
+            radioBtnList.get(i).setText(Budgets.getAllBudgets().get(i).getBudgetName());
+        }
 
 
-        TextView addBudgetView = findViewById(R.id.budgetAddView);
-        addBudgetView.setText(Budgets.printBudgets());
         budgetList = Budgets.printBudgets();
 
     }
@@ -65,10 +88,18 @@ public class EditActivity extends MainActivity{
      */
 
     public void launchHomeFromEdit(View view) {
-
-        Log.i("wtf", "fuccin broke");
         Intent openHome = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(openHome);
         finish();
+    }
+
+    public void deleteSelected(View view) {
+        int index = 0;
+        for (RadioButton i : radioBtnList) {
+            if (i.isSelected()) {
+                index = radioBtnList.indexOf(i);
+                Budgets.removeBudget(Budgets.getAllBudgets().get(index));
+            }
+        }
     }
 }
