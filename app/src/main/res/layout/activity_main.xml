@@ -10,7 +10,7 @@
     tools:context=".MainActivity"
     tools:layout_editor_absoluteY="81dp">
 
-    
+
     <Button
         android:id="@+id/open_income"
         style="@style/Widget.AppCompat.Button"
@@ -60,23 +60,16 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="406dp" />
 
-    <TextView
-        android:id="@+id/mainBudgetDisplay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="349dp" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="395dp"
-        android:layout_height="349dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="393dp"
+        android:layout_height="248dp"
         android:layout_gravity="center_vertical"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteX="2dp"
         tools:layout_editor_absoluteY="0dp">
 
         <com.github.mikephil.charting.charts.PieChart
@@ -85,6 +78,41 @@
             android:layout_height="300sp"></com.github.mikephil.charting.charts.PieChart>
 
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/textLayoutMain"
+        android:layout_width="368dp"
+        android:layout_height="141dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/open_edit"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:layout_editor_absoluteX="8dp">
+
+        <TextView
+            android:id="@+id/mainBudgetDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            tools:layout_editor_absoluteX="2dp" />
+
+        <TextView
+            android:id="@+id/tranView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="TextView"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/transButton"
+            app:layout_constraintEnd_toEndOf="@+id/open_income"
+            app:layout_constraintStart_toStartOf="@+id/open_edit"
+            app:layout_constraintTop_toBottomOf="@+id/mainBudgetDisplay" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

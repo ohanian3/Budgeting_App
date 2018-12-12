@@ -2,7 +2,6 @@ package com.example.jackson.cd125_final;
 
 
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -73,12 +72,12 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //reads saved files TODO
         if (readSave("user data") != null) {
             for (Budgets i : readSave("user data")) {
                 Budgets j = new Budgets(i);
             }
         }
+
 
         //Text display on main page
         remaining = (Budgets.getTotalBudget() - Budgets.getAllSpent());
@@ -86,6 +85,16 @@ public class MainActivity extends AppCompatActivity{
 
         TextView budgView = findViewById(R.id.mainBudgetDisplay);
         budgView.setText(budgetDisplay);
+
+        // Recent Transaction view on Main Screen
+        TextView transView = findViewById(R.id.tranView);
+        String tempTransView = "\t Recent Transactions: \n";
+        ArrayList<Transaction> tempTrans = Transaction.getAllTrans();
+        for (int i = tempTrans.size() - 1; i > -1 && i > tempTrans.size() - 4; i--) {
+            tempTransView = tempTransView + "$" + tempTrans.get(i).getAmount();
+            tempTransView = tempTransView + " spent on " + tempTrans.get(i).getTag() + "\n";
+        }
+        transView.setText(tempTransView);
 
 
         //Make main page pie chart
@@ -161,6 +170,7 @@ public class MainActivity extends AppCompatActivity{
         PieData pieData = new PieData((dataSet));
         pieData.setValueTextSize(10f);
         pieData.setValueTextColor(Color.YELLOW);
+        pieData.setValueTextSize(15);
         pieChart.setData(pieData);
         //PieChart Ends Here
     }
@@ -197,7 +207,7 @@ public class MainActivity extends AppCompatActivity{
         Gson gsonSave = gsonb.create();
 
 
-        String loadValue = mSettings.getString(yourSettingName, "");
+        String loadValue = mSettings.getString(yourSettingName, "user data");
         Type type = new TypeToken<ArrayList<Budgets>>(){}.getType();
 
 

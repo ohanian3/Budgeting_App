@@ -61,6 +61,11 @@ public class TransActivity extends MainActivity{
         TextInputEditText inputBudgetAmount =  (TextInputEditText) findViewById(R.id.inputTrans);
         int trans = Integer.parseInt(inputBudgetAmount.getText().toString());
 
+        TextInputEditText inputTag =  (TextInputEditText) findViewById(R.id.transTagInput);
+        String tag = inputTag.getText().toString();
+
+        Transaction newTrans = new Transaction(tag, trans);
+
         int index = 0;
 
         for (RadioButton i : radioBtnList) {
@@ -72,6 +77,10 @@ public class TransActivity extends MainActivity{
 
             }
         }
+
+
+
+
         //hides keyboard
         InputMethodManager goAwayKeyboard = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         goAwayKeyboard.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);

@@ -48,6 +48,8 @@ public class EditActivity extends MainActivity{
             LinearLayout layout = findViewById(R.id.selectBudget);
             layout.addView(radioBtnList.get(i));
             radioBtnList.get(i).setText(Budgets.getAllBudgets().get(i).getBudgetName());
+            radioBtnList.get(i).setTextAppearance(this, android.R.style.TextAppearance_Large);
+
         }
 
 
@@ -68,12 +70,12 @@ public class EditActivity extends MainActivity{
         InputMethodManager goAwayKeyboard = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         goAwayKeyboard.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
-        for (int i = 0; i < Budgets.getAllBudgets().size(); i++) {
-            radioBtnList.add(new RadioButton(this));
-            LinearLayout layout = findViewById(R.id.selectBudget);
-            layout.addView(radioBtnList.get(i));
-            radioBtnList.get(i).setText(Budgets.getAllBudgets().get(i).getBudgetName());
-        }
+
+        radioBtnList.add(new RadioButton(this));
+        LinearLayout layout = findViewById(R.id.selectBudget);
+        layout.addView(radioBtnList.get(radioBtnList.size() - 1));
+        radioBtnList.get(radioBtnList.size() - 1).setText(Budgets.getAllBudgets().get(radioBtnList.size() - 1).getBudgetName());
+
 
 
         budgetList = Budgets.printBudgets();
